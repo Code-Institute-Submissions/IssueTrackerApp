@@ -1,4 +1,5 @@
 # ISSUE TRACKER
+[![Build Status](https://travis-ci.org/tjasajan/IssueTrackerApp.svg?branch=master)](https://travis-ci.org/tjasajan/IssueTrackerApp)
 
 The primary entity in the Issue Tracker is a ticket describing a user’s issue, with ticket status.
 
