@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 
+{% load bootstrap_tags %}
+
+
 {% block content %}
 
-<p>Login form</p>
+<form method="POST">
+    
+    <legend>Login to your account</legend>
+    
+    {% csrf_token %}
+    {{ login_form|as_bootstrap }}
+    
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+    
+</form>
 
 {% endblock %}
