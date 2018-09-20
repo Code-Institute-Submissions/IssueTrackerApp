@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_tags %}
+
+{% block content %}
+
+<br>
+<p>Already have an account? Sign in <a href="{% url 'login' %}">here</a></p>
+<br>
+
+<form method="POST">
+    
+        <legend>Register new account</legend>
+        
+        {% csrf_token %}
+        {{ registration_form|as_bootstrap }}
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+        
+    </form>
+    
+{% endblock %}
