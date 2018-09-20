@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    
+    <h3>{{ ticket.name }} <span class="badge">{{ ticket.status }}</span></h3>
+    
+    <p>{{ ticket.description }}</p>
+    
+    {% if ticket.image %}
+    <div class="product-img">
+        <img src="{{ ticket.image }}" class="img-responsive">
+    </div>
+    
+    {% endif %}
+    
+    
+</div>
+
+
+
+{% endblock %}

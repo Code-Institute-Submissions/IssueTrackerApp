@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="list-group">
+
+    {% for ticket in tickets %}
+        
+    <a href="{% url 'ticket_details' ticket.id %}" class="list-group-item">
+        <span class="badge">{{ ticket.status }}</span>
+        {{ ticket.name }}
+    </a>
+    
+    {% endfor %}
+
+</div>
+
+
+
+{% endblock %}
