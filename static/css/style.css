@@ -1,0 +1,28 @@
+
+/* ----------  Issues  ---------- */
+/* Colors */
+.badge-lightblue {
+    background-color: #5bc0de;
+}
+.badge-green {
+    background-color: #5cb85c;
+}
+.badge-orange {
+    background-color: #f0ad4e;
+}
+/* Margins, positioning */
+.badge.badge-no-float {
+    float: none;
+}
+.list-group-item {
+    margin-bottom: 20px;
+}
+.image-to-zoom {
+    width: 200px;
+    cursor: pointer;
+}
+
+/* ----------  General  ---------- */
+.align-center {
+    text-align: center;
+}

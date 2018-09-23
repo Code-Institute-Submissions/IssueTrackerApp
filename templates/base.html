@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Issue Tracker</title>
 </head>
 <body>
@@ -32,6 +34,7 @@
                 <ul class="nav navbar-nav navbar-right">
                                        
                     {% if user.is_authenticated %}
+                    <li><a href="#">{{ user.username }}</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                     <li><a href="{% url 'login' %}">Login</a></li>
@@ -69,7 +72,7 @@
     <footer>
         <div class="footer navbar-fixed-bottom">
             <hr>
-            <p style="text-align:center">tjasajan &nbsp; | &nbsp; 2018</p>
+            <p class="align-center">tjasajan &nbsp; | &nbsp; 2018</p>
         </div>
     </footer>
     

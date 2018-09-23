@@ -2,23 +2,63 @@
 
 {% block content %}
 
-
 <div class="container">
+    <h4>
+    {% if ticket.ticket_type == 'BUG' %}
+        <span class="label label-danger">{{ ticket.ticket_type }}</span>
+    {% else %}
+        <span class="label label-primary">{{ ticket.ticket_type }}</span>
+    {% endif %}
+    &nbsp;
+    {% if ticket.status == 'DOING' %}
+        <span class="label label-info">Status: {{ ticket.status }}</span>
+    {% elif ticket.status == 'DONE' %}
+        <span class="label label-success">Status: {{ ticket.status }}</span>
+    {% else %}
+        <span class="label label-warning">Status: {{ ticket.status }}</span>
+    {% endif %}
+    &nbsp;
+    <span class="label label-default">Votes: {{ ticket.upvotes }}</span>
+    </h4>
     
-    <h3>{{ ticket.name }} <span class="badge">{{ ticket.status }}</span></h3>
+    <h3>{{ ticket.title }}</h3>
     
+    
+    <br>
     <p>{{ ticket.description }}</p>
+    <br>
     
     {% if ticket.image %}
-    <div class="product-img">
-        <img src="{{ ticket.image }}" class="img-responsive">
+    <div class="issue-img">
+        <img src="{{ MEDIA_URL }}{{ ticket.image }}" class="image-to-zoom">
     </div>
-    
     {% endif %}
     
+    <br>
+    <p><b>Tags: </b>{{ ticket.tags }}</p>
+    <p><i>Ticket submitted: {{ ticket.created_date|date:"M d, Y" }}</i></p>
+    <p>Author: {{ ticket.author }}</p>
     
 </div>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Resize image on click with animation
+        $('.image-to-zoom').on('click', function() {
+            if ($(this).width() === 200) {
+                $(this).animate({
+                    width: "100%",
+                    maxWidth: "90vw"
+                }, 700);
+            } else {
+                $(this).animate({
+                    width: "200px",
+                }, 700);
+            }
+        });
+    });
+</script>
 
 
 {% endblock %}

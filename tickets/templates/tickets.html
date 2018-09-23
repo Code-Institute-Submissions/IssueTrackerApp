@@ -8,8 +8,23 @@
     {% for ticket in tickets %}
         
     <a href="{% url 'ticket_details' ticket.id %}" class="list-group-item">
-        <span class="badge">{{ ticket.status }}</span>
-        {{ ticket.name }}
+        
+        {% if ticket.ticket_type == 'BUG' %}
+            <span class="label label-danger">{{ ticket.ticket_type }}</span>
+        {% else %}
+            <span class="label label-primary">{{ ticket.ticket_type }}</span>
+        {% endif %}
+        
+        {% if ticket.status == 'DOING' %}
+            <span class="badge badge-lightblue">{{ ticket.status }}</span>
+        {% elif ticket.status == 'DONE' %}
+        <span class="badge badge-green">{{ ticket.status }}</span>
+        {% else %}
+            <span class="badge badge-orange">{{ ticket.status }}</span>
+        {% endif %}
+        
+        &nbsp;{{ ticket.title }}&nbsp;
+        <span class="badge badge-no-float">{{ ticket.upvotes }}</span>
     </a>
     
     {% endfor %}
