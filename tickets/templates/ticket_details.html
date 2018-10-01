@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
+{% load bootstrap_tags %}
+
 {% block content %}
 
+<!-- Ticket detailed info -->
 <div class="container">
     <h4>
     {% if ticket.ticket_type == 'BUG' %}
@@ -36,9 +39,31 @@
     
     <br>
     <p><b>Tags: </b>{{ ticket.tags }}</p>
-    <p><i>Ticket submitted: {{ ticket.created_date|date:"M d, Y" }}</i></p>
-    <p>Author: {{ ticket.author }}</p>
-    
+    <p><i>Ticket submitted by {{ ticket.author }} on {{ ticket.created_date|date:"M d 'y, G:i" }}</i></p>
+
+</div>
+<br>
+
+<!-- Ticket comments section -->
+<div class="container">
+    <h4><u>Comments</u></h4>
+    <hr>
+    {% for comment in comments %}
+        
+        <p>{{ comment.comment }}</p>
+        <small>{{ comment.author }} - {{ comment.comment_date|date:"M d 'y, G:i" }}</small>
+        <hr>
+    {% endfor %}
+</div>
+
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} 
+        {{ comment_form|as_bootstrap_inline }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>   
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
