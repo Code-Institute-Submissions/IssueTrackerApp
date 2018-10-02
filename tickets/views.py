@@ -1,7 +1,9 @@
 """Views for tickets"""
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Ticket, TicketComment
+from django.contrib import messages
+#from vote.models import Vote
+from .models import Ticket
 from .forms import TicketForm, TicketCommentForm
 
 def get_all_tickets(request):
@@ -15,20 +17,31 @@ def ticket_details(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk)
     # Display comments
     comments = ticket.ticketcomment_set.all().order_by('comment_date')
-
+    # Display votes
+    votes = ticket.votes.count()
     # Form for adding a comment
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST.get('submit'):
         comment_form = TicketCommentForm(request.POST, request.FILES)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.author = request.user.username
             comment.ticket = ticket
             comment.save()
-            # comment_form = TicketCommentForm()
             return redirect(ticket_details, pk=ticket.pk)
+    # Form for upvoting tickets
+    elif request.method == 'POST' and not request.POST.get('submit'):
+        comment_form = TicketCommentForm()
+        if request.user.is_authenticated:
+            if ticket.votes.exists(user_id=request.user.pk):
+                messages.error(request, "You already upvoted this ticket")
+            else:
+                ticket.votes.up(user_id=request.user.pk)
+            return redirect(ticket_details, pk=ticket.pk)
+        else:
+            messages.error(request, "You must be logged in to upvote tickets")
     else:
         comment_form = TicketCommentForm()
-    return render(request, 'ticket_details.html', {'ticket': ticket, 'comments': comments, 'comment_form': comment_form})
+    return render(request, 'ticket_details.html', {'ticket': ticket, 'votes': votes, 'comments': comments, 'comment_form': comment_form})
 
 @login_required
 def create_ticket(request, pk=None):

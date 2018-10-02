@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% load bootstrap_tags %}
 
 {% block content %}
@@ -21,10 +22,15 @@
         <span class="label label-warning">Status: {{ ticket.status }}</span>
     {% endif %}
     &nbsp;
-    <span class="label label-default">Votes: {{ ticket.upvotes }}</span>
+    <span class="label label-default">Votes: {{ votes }}</span>
     </h4>
     
-    <h3>{{ ticket.title }}</h3>
+    <h3>{{ ticket.title }}
+        <form method="POST" action="" class="voting-form">
+            {% csrf_token %}
+            <input type="image" src="{% static 'img/liked.png' %}" name="upvote" value="Upvote" class="upvote-img" title="Upvote" alt="Upvote" >
+        </form>
+    </h3>
     
     
     <br>
@@ -38,6 +44,7 @@
     {% endif %}
     
     <br>
+
     <p><b>Tags: </b>{{ ticket.tags }}</p>
     <p><i>Ticket submitted by {{ ticket.author }} on {{ ticket.created_date|date:"M d 'y, G:i" }}</i></p>
 
@@ -56,15 +63,19 @@
     {% endfor %}
 </div>
 
+{% if user.is_authenticated %}
 <div class="container">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %} 
         {{ comment_form|as_bootstrap_inline }}
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="submit" class="btn btn-primary" value="Submit" name="submit" >
         </div>
     </form>   
 </div>
+{% else %}
+<i><a href="{% url 'login' %}">Sign in</a> to add a comment</i>
+{% endif %}
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>

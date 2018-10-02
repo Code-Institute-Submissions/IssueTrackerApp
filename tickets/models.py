@@ -1,7 +1,8 @@
 """Model for tickets and comments"""
 from django.db import models
+from vote.models import VoteModel
 
-class Ticket(models.Model):
+class Ticket(VoteModel, models.Model):
     """Model to create a ticket"""
     STATUS_CHOICES = (
         ('TODO', 'To do'),
@@ -20,7 +21,6 @@ class Ticket(models.Model):
     tags = models.CharField(max_length=30, blank=True, null=True)
     image = models.ImageField(upload_to='images', blank=True, null=True)
     status = models.CharField(choices=STATUS_CHOICES, default='TODO', max_length=10)
-    upvotes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
