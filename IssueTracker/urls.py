@@ -19,9 +19,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from userAuth import urls as urls_auth
 from tickets import urls as urls_tickets
+from cart import urls as urls_cart
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include(urls_auth)),
-    path('issues/', include(urls_tickets))
+    path('issues/', include(urls_tickets)),
+    path('cart/', include(urls_cart)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

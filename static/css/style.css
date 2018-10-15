@@ -11,9 +11,6 @@
     background-color: #f0ad4e;
 }
 /* Margins, positioning */
-.badge.badge-no-float {
-    float: none;
-}
 .list-group-item {
     margin-bottom: 20px;
 }

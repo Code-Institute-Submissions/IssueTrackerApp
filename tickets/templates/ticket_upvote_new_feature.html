@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+<!-- Ticket payable upvote -->
+  
+    
+<br>
+
+<p>To upvote a new feature, we need your contribution to make it happen. We promise to always spend at least 50% of our time working on developing the highest-paid feature.</p>
+<br>
+
+    <form method="POST"  action="{% url 'add_to_cart' ticket.id %}" class="form-inline" >
+    
+        {% csrf_token %} 
+        
+        <div class="form-group">
+            <label for="amount">Contribution: </label>
+            <input name="amount" id="amount" type="number" min="10" max="1000" value="10" class="form-control">
+            <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+            <button type="submit" class="btn btn-primary">Add to cart</button>
+        </div>
+    
+</form>
+
+<br>
+<h4>{{ ticket.title }}</h4>
+<p>{{ ticket.description }}</p>
+
+
+
+{% endblock %}

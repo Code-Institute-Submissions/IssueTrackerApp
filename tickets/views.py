@@ -32,11 +32,14 @@ def ticket_details(request, pk):
     elif request.method == 'POST' and not request.POST.get('submit'):
         comment_form = TicketCommentForm()
         if request.user.is_authenticated:
-            if ticket.votes.exists(user_id=request.user.pk):
-                messages.error(request, "You already upvoted this ticket")
-            else:
-                ticket.votes.up(user_id=request.user.pk)
-            return redirect(ticket_details, pk=ticket.pk)
+            if ticket.ticket_type == 'BUG':
+                if ticket.votes.exists(user_id=request.user.pk):
+                    messages.error(request, "You already upvoted this ticket")
+                else:
+                    ticket.votes.up(user_id=request.user.pk)
+                return redirect(ticket_details, pk=ticket.pk)
+            elif ticket.ticket_type == 'NEW FEATURE':
+                return redirect(upvote_new_feature, pk=ticket.pk)
         else:
             messages.error(request, "You must be logged in to upvote tickets")
     else:
@@ -57,3 +60,8 @@ def create_ticket(request, pk=None):
     else:
         form = TicketForm(instance=ticket)
     return render(request, 'ticket_new.html', {'ticket_form': form})
+
+def upvote_new_feature(request, pk):
+    """Create a view with form to set amount to pay"""
+    ticket = get_object_or_404(Ticket, pk=pk)
+    return render(request, 'ticket_upvote_new_feature.html', {'ticket': ticket})

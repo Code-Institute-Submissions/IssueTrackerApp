@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_tags %}
+
+{% block content %}
+
+
+
+{% for item in cart_items %}
+
+{% if item.amount > 0 %}
+
+<h4>{{ item.new_feature.title }}</h4>
+<p>{{ item.new_feature.description }}</p>
+<p>{{ item.new_feature.status }}</p>
+<p>Contribution for this feature: {{ item.amount }}<span class="glyphicon glyphicon-euro" aria-hidden="true"></span></p>
+
+
+<form method="POST" action="{% url 'adjust_amount' item.id %}" class="form-inline" >
+    
+    {% csrf_token %} 
+        
+    <div class="form-group">
+            <button type="submit" class="btn btn-primary">Adjust amount</button>
+            <input name="amount" type="number" min="10" max="1000" value="{{ item.amount }}" class="form-control">
+            <button type="number" name="amount" value="0" class="btn btn-primary">Remove from cart</button>
+    </div>
+ 
+</form>
+    
+<br>
+
+{% endif %}
+
+{% endfor %}
+
+
+<div class="row">
+    {% if total == 0 %}
+    <p>There are no items in your cart</p>
+    {% else %}
+    <p>Total: {{ total }} <span class="glyphicon glyphicon-euro" aria-hidden="true"></span></p>
+    {% endif %}
+</div>
+    
+    
+    
+
+{% endblock %}
