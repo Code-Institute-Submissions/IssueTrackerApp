@@ -15,7 +15,7 @@
             <span class="label label-primary">{{ ticket.ticket_type }}</span>
         {% endif %}
         
-        <span class="badge">{{ ticket.vote_score }} <span class="glyphicon glyphicon-arrow-up"></span></span>
+        <span class="badge">{{ ticket.votes }} <span class="glyphicon glyphicon-arrow-up"></span></span>
         
         {% if ticket.status == 'DOING' %}
             <span class="badge badge-lightblue">{{ ticket.status }}</span>

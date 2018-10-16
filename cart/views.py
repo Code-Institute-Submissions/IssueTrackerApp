@@ -11,7 +11,7 @@ def add_to_cart(request, id):
     cart = request.session.get('cart', {})
     cart[id] = cart.get(id, amount)
     request.session['cart'] = cart
-    return redirect(reverse('view_cart'))
+    return redirect(reverse('tickets'))
 
 def adjust_amount(request, id):
     """Adjust amount to pay"""

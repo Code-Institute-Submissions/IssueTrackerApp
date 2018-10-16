@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>IDHub - a Mobile KYC Solution</h1>
+<hr>
+<h2>Issue Tracker</h2>
+<h3>Issues and new feature requests</h3>
+<p>This page is intended to all users of IDHub Mobile KYC Application.</p>
+<p>If you encounter any issues or have a great idea for improvment, just login and submit your ticket.</p>
+<p>Tickets can be of two types: BUGS and NEW FEATURES.</p>
+<hr>
+<p>We promise to work on IDHub App continuously and to fix all issues. However, we cannot do everything immediately, so we decided to prioritize. 
+    Fixing issues will always be free but for new features we ask for your contribution. </p>
+<p>If you have the same problem as described in one of the tickets, you can upvote it.</p>
+<p>If you want the same feature, you can upvote it and contribute to make it happen.</p>
+<p>We promise to always spend at least 50% of our time working on developing the highest-paid feature.</p>
+
+<hr>
+<h2>IDHub</h2>
+<h3>Overview</h3>
+<p>Mobile application is used in a couple of scenarios, covering everything from Lite KYC to Enhanced Due Diligence process, as required by the end system risk level and compliance. Data is being acquired and verified based on the KYC profile.</p>
+<br>
+<h4>Basic, Lite KYC</h4>
+<p>Intended to be used for some absolute low risk customers for non-financial services, providing customer unique identification.</p>
+<br>
+<h4>Full KYC</h4>
+<p>Intended to be used for regular customers for non-financial services or financial services with a later face-to-face verification.</p>
+<br>
+<h4>Enhanced KYC</h4>
+<p>Intended to be used for customers using financial services.</p>
+
+<br>
+<p>The solution is API based and uses 3rd party services for mobile number verification, login and videoconferencing.</p>
+
+<hr>
+<h3>Mobile Application</h3>
+<ul>
+    <li>for iOS</li>
+    <li>for Android</li>
+</ul>
+
+<hr>
+<h3>Components used in design:</h3>
+<ul>
+    <li>SQL server database</li>
+    <li>oAuth 2.0 based universal login system (internal development) with Firebase based authentication</li>
+    <li>3rd party videoconferencing solution</li>
+    <li>Mobile Application</li>
+    <li>API Service with business logic and database access</li>
+</ul>
+
+
+
+
+
+{% endblock %}

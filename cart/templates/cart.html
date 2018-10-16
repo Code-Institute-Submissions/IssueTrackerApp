@@ -5,15 +5,23 @@
 {% block content %}
 
 
-
+<br>
 {% for item in cart_items %}
 
 {% if item.amount > 0 %}
 
 <h4>{{ item.new_feature.title }}</h4>
-<p>{{ item.new_feature.description }}</p>
-<p>{{ item.new_feature.status }}</p>
-<p>Contribution for this feature: {{ item.amount }}<span class="glyphicon glyphicon-euro" aria-hidden="true"></span></p>
+<p>Current status:    
+    {% if item.new_feature.status == 'DOING' %}
+        <span class="badge badge-lightblue">{{ item.new_feature.status }}</span>
+    {% elif item.new_feature.status == 'DONE' %}
+        <span class="badge badge-green">{{ item.new_feature.status }}</span>
+    {% else %}
+        <span class="badge badge-orange">{{ item.new_feature.status }}</span>
+    {% endif %}
+    
+</p>
+<p>Contribution for this feature: {{ item.amount }} €</p>
 
 
 <form method="POST" action="{% url 'adjust_amount' item.id %}" class="form-inline" >
@@ -21,25 +29,31 @@
     {% csrf_token %} 
         
     <div class="form-group">
-            <button type="submit" class="btn btn-primary">Adjust amount</button>
-            <input name="amount" type="number" min="10" max="1000" value="{{ item.amount }}" class="form-control">
-            <button type="number" name="amount" value="0" class="btn btn-primary">Remove from cart</button>
+            <button type="submit" class="btn btn-primary btn-sm">Adjust amount</button>
+            <input name="amount" type="number" min="10" max="1000" value="{{ item.amount }}" class="form-control form-control-amount">
+            <button type="number" name="amount" value="0" class="btn btn-remove btn-sm" >Remove</button>
     </div>
  
 </form>
     
-<br>
+<hr>
 
 {% endif %}
 
 {% endfor %}
 
-
+<br>
 <div class="row">
     {% if total == 0 %}
-    <p>There are no items in your cart</p>
+    <blockquote>
+        <p><i>There are no items in your cart</i></p>
+    </blockquote>
     {% else %}
-    <p>Total: {{ total }} <span class="glyphicon glyphicon-euro" aria-hidden="true"></span></p>
+    <blockquote>
+        <span>Total: {{ total }} € &nbsp;</span>
+        <a href="{% url 'checkout' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
+    </blockquote>
+
     {% endif %}
 </div>
     

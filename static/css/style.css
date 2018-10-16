@@ -27,7 +27,22 @@
     margin-left: 15px;
 }
 
+/* ----------  Forms  ---------- */
+
+.form-control-amount {
+    height: 30px;
+}
+
+.btn-remove {
+    margin-left: 100px;
+}
+
 /* ----------  General  ---------- */
 .align-center {
     text-align: center;
+}
+
+/* ----------  Footer  ---------- */
+.navbar-fixed-bottom {
+    background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%);
 }

@@ -20,10 +20,14 @@ from django.conf.urls.static import static
 from userAuth import urls as urls_auth
 from tickets import urls as urls_tickets
 from cart import urls as urls_cart
+from checkout import urls as urls_checkout
+from home.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index, name='index'),
     path('accounts/', include(urls_auth)),
     path('issues/', include(urls_tickets)),
     path('cart/', include(urls_cart)),
+    path('checkout/', include(urls_checkout)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

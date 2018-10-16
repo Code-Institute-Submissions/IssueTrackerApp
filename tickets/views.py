@@ -10,6 +10,10 @@ def get_all_tickets(request):
     """Render list of all tickets"""
     # Sort results by created date, descending order
     results = Ticket.objects.all().order_by('-created_date')
+    # Get votes
+    for ticket in results:
+        votes = ticket.votes.count()
+        ticket.votes = votes
     return render(request, 'tickets.html', {'tickets': results})
 
 def ticket_details(request, pk):
