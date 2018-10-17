@@ -21,6 +21,7 @@ class Ticket(VoteModel, models.Model):
     tags = models.CharField(max_length=30, blank=True, null=True)
     image = models.ImageField(upload_to='images', blank=True, null=True)
     status = models.CharField(choices=STATUS_CHOICES, default='TODO', max_length=10)
+    payments = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
