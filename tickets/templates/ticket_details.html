@@ -23,7 +23,9 @@
     {% endif %}
     &nbsp;
     <span class="label label-default">Votes: {{ votes }}</span>
+    {% if ticket.ticket_type == 'NEW FEATURE' %}
     <span class="label label-info">Payments: {{ ticket.payments }} €</span>
+    {% endif %}
     </h4>
     
     <h3>{{ ticket.title }}
