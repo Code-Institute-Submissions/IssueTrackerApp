@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'https://django-issue-tracker-app.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'django-issue-tracker-app.herokuapp.com']
 
 
 # Application definition
