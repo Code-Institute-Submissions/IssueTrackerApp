@@ -27,6 +27,14 @@
     margin-left: 15px;
 }
 
+.label.label-large {
+    font-size: 14px;
+}
+
+.label.label-large a {
+    color: #fff;
+}
+
 /* ----------  Forms  ---------- */
 
 .form-control-amount {

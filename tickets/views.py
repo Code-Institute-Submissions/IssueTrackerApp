@@ -69,3 +69,26 @@ def upvote_new_feature(request, pk):
     """Create a view with form to set amount to pay"""
     ticket = get_object_or_404(Ticket, pk=pk)
     return render(request, 'ticket_upvote_new_feature.html', {'ticket': ticket})
+
+def statistics(request):
+    """Show statistics for tickets"""
+    bugs_todo = len(Ticket.objects.all().filter(ticket_type='BUG', status='TODO'))
+    bugs_doing = len(Ticket.objects.all().filter(ticket_type='BUG', status='DOING'))
+    bugs_done = len(Ticket.objects.all().filter(ticket_type='BUG', status='DONE'))
+    feat_todo = len(Ticket.objects.all().filter(ticket_type='NEW FEATURE', status='TODO'))
+    feat_doing = len(Ticket.objects.all().filter(ticket_type='NEW FEATURE', status='DOING'))
+    feat_done = len(Ticket.objects.all().filter(ticket_type='NEW FEATURE', status='DONE'))
+    # Top voted bug currently working on
+    bugs = Ticket.objects.all().filter(ticket_type='BUG', status='DOING')
+    bug_votes = []
+    for bug in bugs:
+        num_votes = bug.votes.count()
+        bug_votes.append((bug, num_votes))
+    top_bug = max(bug_votes, key=lambda item: item[1])[0]
+    # Highest paid feature currently working on
+    feats = Ticket.objects.all().filter(ticket_type='NEW FEATURE', status='DOING')
+    feat_paid = []
+    for feat in feats:
+        feat_paid.append((feat, feat.payments))
+    top_feat = max(feat_paid, key=lambda item: item[1])[0]
+    return render(request, 'statistics.html', {'top_bug': top_bug, 'top_feat': top_feat, 'bugs_todo': bugs_todo, 'bugs_doing': bugs_doing, 'bugs_done': bugs_done, 'feat_todo': feat_todo, 'feat_doing': feat_doing, 'feat_done': feat_done})

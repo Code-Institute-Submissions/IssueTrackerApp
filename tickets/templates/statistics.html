@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<div class="container">
+    
+    <h3>BUGS</h3>
+    <p>We spend 50% of our time working on fixing bugs with most upvotes.</p>
+    <p>Posting new bugs and upvoting them is free for all users!</p>
+    <br>
+    
+    <h4><u>Current status:</u></h4>
+    <br>
+    <p>
+        <span class="badge badge-orange">TODO: {{ bugs_todo }}</span>
+        <span class="badge badge-lightblue">DOING: {{ bugs_doing }}</span>
+        <span class="badge badge-green">DONE: {{ bugs_done }}</span>
+    </p>
+    <br>
+    <p><u>Currently working on</u>: <span class="label label-danger label-large"><a href="{% url 'ticket_details' top_bug.id %}">{{ top_bug.title }}</a></span></p>
+    <br>
+    <br>
+
+    <hr>
+    
+    
+    <br>
+    <h3>NEW FEATURES</h3>
+    <p>We spend 50% of our time developing new features, working on the highest-paid feature.</p>
+    <p>Posting new ideas is free and you can upvote them by donating 10€ or more.</p>
+    <br>
+    
+    <h4><u>Current status:</u></h4>
+    <br>
+    <p>
+        <span class="badge badge-orange">TODO: {{ feat_todo }}</span>
+        <span class="badge badge-lightblue">DOING: {{ feat_doing }}</span>
+        <span class="badge badge-green">DONE: {{ feat_done }}</span>
+    </p><br>
+    <p><u>Currently working on</u>: <span class="label label-primary label-large"><a href="{% url 'ticket_details' top_feat.id %}">{{ top_feat.title }}</a></span></p>
+    
+</div>
+
+
+{% endblock %}
